@@ -1,0 +1,29 @@
+<table class="table table-striped table-bordered" ng-controller="formsTableController">
+    <tr>
+        <th>
+            Formlarım
+        </th>
+        <th>
+            <button class="btn btn-primary" ng-click="go('/forms/new-form')">
+                Yeni Form Oluştur
+            </button>
+        </th>
+        <th>
+            <div class="form-group">
+                <label>Arama:</label>
+                <input type="text" placeholder="Form Adı Girin" class="form-control"
+                    ng-keyup="searchForms($event.target.value)">
+            </div>
+        </th>
+    </tr>
+    <tbody>
+        <tr ng-repeat="form in forms track by $index">
+            <td colspan="2">
+                {{form.name}}
+            </td>
+            <td>
+                <button class="btn btn-primary" ng-click="go( '/forms/'+form.name)">GÖRÜNTÜLE</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

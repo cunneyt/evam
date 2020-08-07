@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVAM</title>
+    <link href="/assets/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <script src="/assets/js/angular.js"></script>
+    <script src="/assets/js/angular-route.min.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <base href="/">
+</head>
+
+<body>
+    <div ng-app="evamApp">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div ng-view>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const testForm = [{
+            "name": "Test form",
+            "description": "Uye bilgi formu",
+            createdAt: "2017-01-08",
+            fields: [
+                { "required": true, "name": "Ad", dataType: "STRING" },
+                { "required": true, "name": "Soyad", dataType: "STRING" },
+                { "required": false, "name": "Yaş", dataType: "NUMBER" }
+            ]
+        }];
+        localStorage.setItem('forms', JSON.stringify(testForm));
+    </script>
+    <script src="/lib/index.js"></script>
+    <script src="forms/forms.controller.js"></script>
+</body>
+
+</html>

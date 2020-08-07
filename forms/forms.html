@@ -1,0 +1,72 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                <div class="form-group">
+                    <label>
+                        Form Adı:
+                    </label>
+                    <input type="text" class="form-control" ng-model="form.name">
+                </div>
+            </th>
+            <th>
+                <div class="form-group">
+                    <label>
+                        Kaydetme:
+                    </label>
+                    <button ng-click="saveForm()" class="btn btn-primary form-control">KAYDET</button>
+                </div>
+            </th>
+            <th>
+                <div class="form-group">
+                    <button ng-click="go()" class="btn btn-success">ANASAYFA</button>
+                </div>
+            </th>
+        </tr>
+        <tr>
+            <th style="border:0">
+                Alanlar
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <div class="form-group" ng-class="{'has-success':name.$valid}">
+                    <label>Alan Adı:</label>
+                    <input type="text" class="form-control" ng-model="name" required>
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <label>Alan Tipi:</label>
+                    <select class="form-control" ng-model="dataType">
+                        <option value='STRING' selected>STRING</option>
+                        <option value="NUMBER">NUMBER</option>
+                    </select>
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <label>Zorunlu:</label>
+                    <input type="checkbox" class="form-control " style="margin: 0px;" ng-model="required">
+                </div>
+            </td>
+            <td>
+                <div class="form-group">
+                    <label>Alanlara:</label>
+                    <button class="btn btn-primary form-control" ng-click="addToFields()">EKLE</button>
+                </div>
+            </td>
+        </tr>
+        <tr ng-repeat="field in form.fields">
+            <td>
+                {{field.name}}
+            </td>
+            <td>
+                <input type="{{field.dataType==='STRING'?'text':'number'}}" class="form-control"
+                    required="field.required">
+            </td>
+        </tr>
+    </tbody>
+</table>

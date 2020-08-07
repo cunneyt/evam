@@ -1,72 +1,90 @@
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                <div class="form-group">
-                    <label>
-                        Form Adı:
-                    </label>
-                    <input type="text" class="form-control" ng-model="form.name">
-                </div>
-            </th>
-            <th>
-                <div class="form-group">
-                    <label>
-                        Kaydetme:
-                    </label>
-                    <button ng-click="saveForm()" class="btn btn-primary form-control">KAYDET</button>
-                </div>
-            </th>
-            <th>
-                <div class="form-group">
-                    <button ng-click="go()" class="btn btn-success">ANASAYFA</button>
-                </div>
-            </th>
-        </tr>
-        <tr>
-            <th style="border:0">
-                Alanlar
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <div class="form-group" ng-class="{'has-success':name.$valid}">
-                    <label>Alan Adı:</label>
-                    <input type="text" class="form-control" ng-model="name" required>
-                </div>
-            </td>
-            <td>
-                <div class="form-group">
-                    <label>Alan Tipi:</label>
-                    <select class="form-control" ng-model="dataType">
-                        <option value='STRING' selected>STRING</option>
-                        <option value="NUMBER">NUMBER</option>
-                    </select>
-                </div>
-            </td>
-            <td>
-                <div class="form-group">
-                    <label>Zorunlu:</label>
-                    <input type="checkbox" class="form-control " style="margin: 0px;" ng-model="required">
-                </div>
-            </td>
-            <td>
-                <div class="form-group">
-                    <label>Alanlara:</label>
-                    <button class="btn btn-primary form-control" ng-click="addToFields()">EKLE</button>
-                </div>
-            </td>
-        </tr>
-        <tr ng-repeat="field in form.fields">
-            <td>
-                {{field.name}}
-            </td>
-            <td>
-                <input type="{{field.dataType==='STRING'?'text':'number'}}" class="form-control"
-                    required="field.required">
-            </td>
-        </tr>
-    </tbody>
-</table>
+<style>
+    .alert{
+        margin: 0;
+        padding:0;
+    }
+</style>
+<form name="mainForm">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    <div class="form-group">
+                        <label>
+                            Form Adı:
+                        </label>
+                        <input type="text" class="form-control" ng-model="form.name" name="formName" required>
+                        <div ng-if="!mainForm.formName.$valid" class="alert alert-danger">
+                            Bu alanı doldurmak zorunludur
+                        </div>
+                    </div>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <label>
+                            Kaydetme:
+                        </label>
+                        <button ng-click="saveForm()" class="btn btn-primary form-control"
+                            disabled="!mainForm.formName.$valid">KAYDET</button>
+                    </div>
+                </th>
+                <th>
+                    <div class="form-group">
+                        <button ng-click="go()" class="btn btn-success">ANASAYFA</button>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th style="border:0">
+                    Alanlar
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="form-group" ng-class="{'has-success':name.$valid}">
+                        <label>Alan Adı:</label>
+                        <input type="text" class="form-control" ng-model="name" required name="newFieldName">
+                        <div ng-if="!mainForm.newFieldName.$valid" class="alert alert-danger">
+                            Bu alanı doldurmak zorunludur
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <label>Alan Tipi:</label>
+                        <select class="form-control" ng-model="dataType">
+                            <option value='STRING' selected>STRING</option>
+                            <option value="NUMBER">NUMBER</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <label>Zorunlu:</label>
+                        <input type="checkbox" class="form-control " style="margin: 0px;" ng-model="required">
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <label>Alanlara:</label>
+                        <button class="btn btn-primary form-control" ng-click="addToFields()" disabled="!mainForm.newFieldName.$valid">EKLE</button>
+                    </div>
+                </td>
+            </tr>
+            <tr ng-repeat="field in form.fields">
+                <td>
+                    {{field.name}}
+                </td>
+                <td>
+                    <input type="{{field.dataType==='STRING'?'text':'number'}}" class="form-control"
+                        required="field.required" name="field" ng-model="field.value">
+                    <div class="alert alert-danger" ng-if="field.required">
+                        Bu alanı doldurmak zorunludur
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
